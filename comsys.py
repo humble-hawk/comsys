@@ -27,7 +27,6 @@ class component:
                 else:
                     arr = line.split()
                     collector.extend(list(map(int,arr)))
-        
         return [cname, ctype, collector]
     
     def union(self, comp2):
@@ -40,17 +39,18 @@ class component:
             raise TypeError("The type of collectors should be same.")
     
     def intersection(self, comp2): 
+        
         if self.type == comp2.type:
             name = "intersection"
             intersection = list(set(self.collector) & set(comp2.collector))
             return self._NewComponent(name, self.type, intersection)
-            
         else: 
             raise TypeError("The type of collectors should be same.")
     
     def writeComponent(self, file):
         
-        firstline = "COMP," + self.name + "," + self.type + "," + str(len(self.collector))
+        lineElem = ["COMP", self.name, self.type, str(len(self.collector))]
+        firstline = ",".join(elem for elem in lineElem)
         secondline = "(8I10)"
         with open(file, "w") as file:
             file.write("{}\n".format(firstline))
@@ -61,6 +61,3 @@ class component:
                 formatted = ' '.join(['{0: >10}'.format(word) for word in a])
                 file.write("{}\n".format(formatted))
                 i += 8
-
-import os
-print("CWD", os.getcwd())
