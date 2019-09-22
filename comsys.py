@@ -56,7 +56,7 @@ class component:
             file.write("{}\n".format(firstline))
             file.write("{}\n".format(secondline))
             i = 0
-            while i < len(nodes):
+            while i < len(self.collector):
                 a = self.collector[i:i+8]
                 formatted = ' '.join(['{0: >10}'.format(word) for word in a])
                 file.write("{}\n".format(formatted))
